@@ -1,0 +1,133 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:othmane_bouhanib/reusable_widgets/reusable_widget.dart';
+import 'package:othmane_bouhanib/screens/home_screen.dart';
+import 'package:othmane_bouhanib/utils/color_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:othmane_bouhanib/screens/signup_screen.dart';
+
+class ProfilPage extends StatefulWidget {
+  const ProfilPage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilPageState createState() => _ProfilPageState();
+}
+
+class _ProfilPageState extends State<ProfilPage> {
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _userNameTextController = TextEditingController();
+  TextEditingController _dateNaissanceTextController = TextEditingController();
+  TextEditingController _villeTextController = TextEditingController();
+  TextEditingController _codePostalTextController = TextEditingController();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late String _uid;
+  late String _name;
+  late String _email;
+  late String _ville;
+  late String _codepostal;
+  late String _age;
+
+  Future<void> getData() async {
+    User? user = _auth.currentUser;
+    final _uid = user?.uid;
+    final DocumentSnapshot userDoc =
+        await FirebaseFirestore.instance.collection('Users').doc(_uid).get();
+    _age = userDoc.get('age');
+    _name = userDoc.get('nom');;
+    _email = userDoc.get('email');;
+    _ville = userDoc.get('ville');;
+    _codepostal = userDoc.get('code_postal');;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text(
+          "Mon Profil",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+            hexStringToColor("CB2B93"),
+            hexStringToColor("9546C4"),
+            hexStringToColor("5E61F4")
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+          child: SingleChildScrollView(
+              child: Padding(
+            padding: EdgeInsets.fromLTRB(20, 120, 20, 0),
+            child: Column(
+              children: [
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.person),
+                    labelText: 'Enter votre Nom ',
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.calendar_view_day),
+                    labelText: 'Enter votre age',
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.location_city_sharp),
+                    labelText: 'Enter votre Ville',
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.reduce_capacity_outlined),
+                    labelText: 'Enter le Code Postal',
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.person_outline),
+                    labelText: 'Enter votre Email',
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          ))),
+    );
+  }
+}

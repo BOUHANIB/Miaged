@@ -11,6 +11,8 @@ class SignInScreen extends StatefulWidget {
   _SignInScreenState createState() => _SignInScreenState();
 }
 
+
+
 class _SignInScreenState extends State<SignInScreen> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
@@ -61,7 +63,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 {
                   FirebaseAuth.instance.signInWithEmailAndPassword(
                       email: _emailTextController.text,
-                      password: _passwordTextController.text
+                      password: _passwordTextController.text,
                   ).then((value) {
                     Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HomeScreen()));

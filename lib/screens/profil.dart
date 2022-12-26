@@ -4,23 +4,49 @@ import 'package:othmane_bouhanib/reusable_widgets/reusable_widget.dart';
 import 'package:othmane_bouhanib/screens/home_screen.dart';
 import 'package:othmane_bouhanib/utils/color_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:othmane_bouhanib/screens/signup_screen.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({Key? key}) : super(key: key);
-
   @override
   _ProfilPageState createState() => _ProfilPageState();
 }
 
-
-
 class _ProfilPageState extends State<ProfilPage> {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
-  TextEditingController _dateNaissanceTextController = TextEditingController();
-  TextEditingController _villeTextController = TextEditingController();
-  TextEditingController _codePostalTextController = TextEditingController();
+
+  String? name = '';
+  String? email = '';
+  String? age = '';
+  String? code = '';
+  String? ville = '';
+
+  Future _getDataFromDatabase() async
+  {
+    await FirebaseFirestore.instance.collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((snapshot) async
+    {
+      if(snapshot.exists)
+      {
+        setState(() {
+          name = snapshot.data()!["nom"];
+          age = snapshot.data()!["age"];
+          code = snapshot.data()!["code_postal"];
+          ville = snapshot.data()!["ville"];
+          email = snapshot.data()!["email"];
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getDataFromDatabase();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,56 +61,102 @@ class _ProfilPageState extends State<ProfilPage> {
         ),
       ),
       body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-                hexStringToColor("CB2B93"),
-                hexStringToColor("9546C4"),
-                hexStringToColor("5E61F4")
-              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-          child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 120, 20, 0),
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 20,
+            hexStringToColor("CB2B93"),
+            hexStringToColor("9546C4"),
+            hexStringToColor("5E61F4")
+          ],begin: Alignment.topCenter, end: Alignment.bottomCenter)
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Nom est :' + name!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    reusableTextField("Enter UserName", Icons.person, false,
-                        _userNameTextController),
-                    const SizedBox(
-                      height: 20,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Date de naissance est :' + age!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    reusableTextField("Enter Date de naissance", Icons.date_range, false,
-                        _dateNaissanceTextController),
-                    const SizedBox(
-                      height: 20,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Ville est :' + ville!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    reusableTextField("Enter la Ville", Icons.location_city_outlined, false,
-                        _villeTextController),
-                    const SizedBox(
-                      height: 20,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Code postale est :' + code!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    reusableTextField("Enter le Code Postal", Icons.reduce_capacity_outlined, false,
-                        _codePostalTextController),
-                    const SizedBox(
-                      height: 20,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Email est :' + email!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    reusableTextField("Enter Email Id", Icons.person_outline, false,
-                        _emailTextController),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    reusableTextField("Enter Password", Icons.lock_outlined, true,
-                        _passwordTextController),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                ),
-              ))),
+                  ),
+                ],
+              ),
+            ],
+          ),
+      ),
     );
   }
 }
-

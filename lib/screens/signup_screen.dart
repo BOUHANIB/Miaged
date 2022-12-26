@@ -17,10 +17,10 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
-  TextEditingController _dateNaissanceTextController = TextEditingController();
-  TextEditingController _villeTextController = TextEditingController();
-  TextEditingController _codePostalTextController = TextEditingController();
+  final _userNameTextController = TextEditingController();
+  final _dateNaissanceTextController = TextEditingController();
+  final _villeTextController = TextEditingController();
+  final _codePostalTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          "S’inscrire",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
+        title: const Text("S’inscrire",),
       ),
       body: Container(
           width: MediaQuery.of(context).size.width,
@@ -81,23 +78,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    firebaseUIButton(context, "S’inscrire", () {
-                      FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                          email: _emailTextController.text,
-                          password: _passwordTextController.text)
-                          .then((value) {
-                        print("Created New Account");
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => HomeScreen()));
-                      }).onError((error, stackTrace) {
-                        showDialog(context: context,
-                            builder: (context) {
-                              return AlertDialog(title :Text("Veuillez réessayer"),);
-                            });
-                        print("Error ${error.toString()}");
-                      });
-                    })
+                    ElevatedButton(
+                        onPressed: () {
+                          FirebaseAuth.instance.createUserWithEmailAndPassword(
+                              email: _emailTextController.text,
+                              password: _passwordTextController.text)
+                              .then((value) {
+                            print("Created New Account");
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen()));
+                          }).onError((error, stackTrace) {
+                            showDialog(context: context,
+                                builder: (context) {
+                                  return AlertDialog(title :Text("Veuillez réessayer"),);
+                                });
+                            print("Error ${error.toString()}");
+                          });
+                          FirebaseFirestore.instance.collection('Users').add({
+                            'nom': _userNameTextController.value.text,
+                            'age': _dateNaissanceTextController.value.text,
+                            'ville': _villeTextController.value.text,
+                            'code_postal': _codePostalTextController.value.text,
+                            'email': _emailTextController.value.text,
+                          });
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Ajouter')),
                   ],
                 ),
               ))),

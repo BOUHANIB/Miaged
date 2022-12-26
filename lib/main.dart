@@ -8,6 +8,8 @@ import 'package:othmane_bouhanib/screens/chercher.dart';
 import 'package:othmane_bouhanib/screens/signup_screen.dart';
 import 'package:othmane_bouhanib/screens/panier.dart';
 
+import 'add_vetement_page.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: const SignInScreen(),
     );
   }
 }
