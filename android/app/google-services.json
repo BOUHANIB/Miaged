@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "602394318520",
+    "project_id": "signin-example-3db05",
+    "storage_bucket": "signin-example-3db05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602394318520:android:0da814975b14a29d51064d",
+        "android_client_info": {
+          "package_name": "com.example.othmane_bouhanib"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602394318520-t4mvlvlph27uggb0tk8503hkluu3f02g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAePNSi_BOf38-bgZpzbgAsHu3Ap16_flM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602394318520-t4mvlvlph27uggb0tk8503hkluu3f02g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
