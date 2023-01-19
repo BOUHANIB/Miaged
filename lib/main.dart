@@ -1,14 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:othmane_bouhanib/screens/home_screen.dart';
-import 'package:othmane_bouhanib/screens/profil.dart';
+import 'package:othmane_bouhanib/screens/profil_copie';
 import 'package:othmane_bouhanib/screens/signin_screen.dart';
-import 'package:othmane_bouhanib/screens/profil.dart';
+import 'package:othmane_bouhanib/screens/profil';
 import 'package:othmane_bouhanib/screens/chercher.dart';
 import 'package:othmane_bouhanib/screens/signup_screen.dart';
 import 'package:othmane_bouhanib/screens/panier.dart';
 
-import 'add_vetement_page.dart';
+import 'screens/add_vetement_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        "/profil": (context) => const ProfilPage(),
+        "/profil": (context) => ProfilPage(),
         "/chercher": (context) => const ChercherPage(),
         "/liste_vetement": (context) => const HomeScreen(),
         "/panier": (context) => const PanierPage(),

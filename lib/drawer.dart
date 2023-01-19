@@ -55,7 +55,7 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.pushNamed(context, "/chercher");
             },
           ),
-          const Divider(height: 8, color: Colors.purple),
+          /*const Divider(height: 8, color: Colors.purple),
           const Divider(height: 8, color: Colors.purple),
           ListTile(
             title: const Text(
@@ -68,6 +68,8 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.pushNamed(context, "/panier");
             },
           ),
+
+           */
           const Divider(height: 8, color: Colors.purple),
           const Divider(height: 8, color: Colors.purple),
           ListTile(

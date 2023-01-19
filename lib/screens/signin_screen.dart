@@ -38,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
               hexStringToColor("CB2B93"),
               hexStringToColor("9546C4"),
               hexStringToColor("5E61F4")
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+            ], begin: Alignment.centerRight, end: Alignment.centerLeft)),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(
@@ -100,9 +100,11 @@ class _SignInScreenState extends State<SignInScreen> {
             " Inscrivez-vous",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-        )
+        ),
       ],
+
     );
+
   }
 
 }

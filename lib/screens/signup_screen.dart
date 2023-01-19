@@ -39,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hexStringToColor("CB2B93"),
                 hexStringToColor("9546C4"),
                 hexStringToColor("5E61F4")
-              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+              ], begin: Alignment.centerRight, end: Alignment.centerLeft)),
           child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 120, 20, 0),
@@ -48,32 +48,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    reusableTextField("Enter UserName", Icons.person, false,
+                    reusableTextField("Entrer UserName", Icons.person, false,
                         _userNameTextController),
                     const SizedBox(
                       height: 20,
                     ),
-                    reusableTextField("Enter Date de naissance", Icons.date_range, false,
+                    reusableTextField("Entrer Date de naissance", Icons.date_range, false,
                         _dateNaissanceTextController),
                     const SizedBox(
                       height: 20,
                     ),
-                    reusableTextField("Enter la Ville", Icons.location_city_outlined, false,
+                    reusableTextField("Entrer la Ville", Icons.location_city_outlined, false,
                         _villeTextController),
                     const SizedBox(
                       height: 20,
                     ),
-                    reusableTextField("Enter le Code Postal", Icons.reduce_capacity_outlined, false,
+                    reusableTextField("Entrer le Code Postal", Icons.reduce_capacity_outlined, false,
                         _codePostalTextController),
                     const SizedBox(
                       height: 20,
                     ),
-                    reusableTextField("Enter Email Id", Icons.person_outline, false,
+                    reusableTextField("Entrer Email Id", Icons.person_outline, false,
                         _emailTextController),
                     const SizedBox(
                       height: 20,
                     ),
-                    reusableTextField("Enter Password", Icons.lock_outlined, true,
+                    reusableTextField("Entrer Password", Icons.lock_outlined, true,
                         _passwordTextController),
                     const SizedBox(
                       height: 20,

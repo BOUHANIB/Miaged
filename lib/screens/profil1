@@ -8,38 +8,45 @@ import 'package:othmane_bouhanib/screens/signup_screen.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({Key? key}) : super(key: key);
-
   @override
   _ProfilPageState createState() => _ProfilPageState();
 }
 
 class _ProfilPageState extends State<ProfilPage> {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
-  TextEditingController _dateNaissanceTextController = TextEditingController();
-  TextEditingController _villeTextController = TextEditingController();
-  TextEditingController _codePostalTextController = TextEditingController();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  late String _uid;
-  late String _name;
-  late String _email;
-  late String _ville;
-  late String _codepostal;
-  late String _age;
+  String? name = '';
+  String? email = '';
+  String? age = '';
+  String? code = '';
+  String? ville = '';
 
-  Future<void> getData() async {
-    User? user = _auth.currentUser;
-    final _uid = user?.uid;
-    final DocumentSnapshot userDoc =
-        await FirebaseFirestore.instance.collection('Users').doc(_uid).get();
-    _age = userDoc.get('age');
-    _name = userDoc.get('nom');;
-    _email = userDoc.get('email');;
-    _ville = userDoc.get('ville');;
-    _codepostal = userDoc.get('code_postal');;
+  Future _getDataFromDatabase() async
+  {
+    await FirebaseFirestore.instance.collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((snapshot) async
+    {
+      if(snapshot.exists)
+      {
+        setState(() {
+          name = snapshot.data()!["nom"];
+          age = snapshot.data()!["age"];
+          code = snapshot.data()!["code_postal"];
+          ville = snapshot.data()!["ville"];
+          email = snapshot.data()!["email"];
+        });
+      }
+    });
   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getDataFromDatabase();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,80 +61,95 @@ class _ProfilPageState extends State<ProfilPage> {
         ),
       ),
       body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            hexStringToColor("CB2B93"),
-            hexStringToColor("9546C4"),
-            hexStringToColor("5E61F4")
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-          child: SingleChildScrollView(
-              child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 120, 20, 0),
-            child: Column(
-              children: [
-                const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.person),
-                    labelText: 'Enter votre Nom ',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Nom est :' + name!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.calendar_view_day),
-                    labelText: 'Enter votre age',
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Date de naissance est :' + age!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.location_city_sharp),
-                    labelText: 'Enter votre Ville',
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Ville est :' + ville!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.reduce_capacity_outlined),
-                    labelText: 'Enter le Code Postal',
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Code postale est :' + code!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.person_outline),
-                    labelText: 'Enter votre Email',
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Votre Email est :' + email!,
+                    style : const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
-          ))),
+                ],
+              ),
+            ],
+          ),
+      ),
     );
   }
 }

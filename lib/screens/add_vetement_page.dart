@@ -24,9 +24,17 @@ class _AddPageState extends State<AddPage> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
           title: const Text('Ajouter Vêtement'),
+            centerTitle: true,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    hexStringToColor("CB2B93"),
+                    hexStringToColor("9546C4"),
+                    hexStringToColor("5E61F4")
+                  ], begin: Alignment.centerRight, end: Alignment.centerLeft)
+              ),
+            )
         ),
         body: Container(
             width: MediaQuery.of(context).size.width,
@@ -36,7 +44,7 @@ class _AddPageState extends State<AddPage> {
               hexStringToColor("CB2B93"),
               hexStringToColor("9546C4"),
               hexStringToColor("5E61F4")
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+            ], begin: Alignment.centerRight, end: Alignment.centerLeft)),
             child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 120, 20, 0),

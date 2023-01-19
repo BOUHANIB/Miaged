@@ -4,7 +4,7 @@ import 'package:othmane_bouhanib/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:othmane_bouhanib/drawer.dart';
 
-import '../add_vetement_page.dart';
+import 'add_vetement_page.dart';
 import '../utils/color_utils.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,38 +18,42 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.pinkAccent,
-        extendBodyBehindAppBar: true,
-        endDrawer: const MyDrawer(),
-        appBar: AppBar(
-          backgroundColor: Colors.purpleAccent,
-          elevation: 0,
-          title: const Text('Liste de vêtements'),
-          leading: IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) {
-                  return const AddPage();
-                },
-                fullscreenDialog: true,
-              ));
-            },
+      endDrawer: const MyDrawer(),
+      appBar: AppBar(
+        title: const Text('Liste de vêtements'),
+          centerTitle: true,
+        flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  hexStringToColor("CB2B93"),
+                  hexStringToColor("9546C4"),
+                  hexStringToColor("5E61F4")
+                ], begin: Alignment.centerRight, end: Alignment.centerLeft)),
           ),
+        leading: IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) {
+                return const AddPage();
+              },
+              fullscreenDialog: true,
+            ));
+          },
         ),
-        body:
-        Container(
+      ),
+      body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-              hexStringToColor("CB2B93"),
-              hexStringToColor("9546C4"),
-              hexStringToColor("5E61F4")
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-      child: const VetementsInformation(),
-        ),
-        );
+          hexStringToColor("CB2B93"),
+          hexStringToColor("9546C4"),
+          hexStringToColor("5E61F4")
+        ], begin: Alignment.centerRight, end: Alignment.centerLeft)),
+        child: const VetementsInformation(),
+      ),
+    );
   }
 }
 
@@ -103,12 +107,12 @@ class _VetementsInformationState extends State<VetementsInformation> {
                               ),
                             ],
                           ),
-                        Row(
-                          children: [
-                            const Text('Marque : '),
-                            Text(vetement['marque'].toString()),
-                          ],
-                        ),
+                          Row(
+                            children: [
+                              const Text('Marque : '),
+                              Text(vetement['marque'].toString()),
+                            ],
+                          ),
                           Row(
                             children: [
                               const Text('Prix : '),
@@ -133,18 +137,16 @@ class _VetementsInformationState extends State<VetementsInformation> {
                                 )
                             ],
                           ),
-                      Row(
-                        children: [
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                            icon: const Icon(
-                              Icons.add,
-                              color: Colors.black,
+                          Row(children: [
+                            IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                              icon: const Icon(
+                                Icons.add,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {},
                             ),
-                            onPressed: () {
-                            },
-                          ),
                           ])
                         ],
                       ))

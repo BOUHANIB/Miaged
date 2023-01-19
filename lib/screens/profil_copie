@@ -1,0 +1,69 @@
+/*
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+class ProfilPage extends StatefulWidget {
+  @override
+  _ProfilPageState createState() => _ProfilPageState();
+}
+
+class _ProfilPageState extends State<ProfilPage> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  TextEditingController ?_emailController;
+  TextEditingController ?_datenController;
+  TextEditingController ?_nomController;
+  TextEditingController ?_prenomController;
+  TextEditingController ?_adresseController;
+  TextEditingController ?_codepController;
+  TextEditingController ?_villeController;
+  Future<void> _selectDateFromPicker(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(DateTime.now().year - 20),
+      firstDate: DateTime(DateTime.now().year - 30),
+      lastDate: DateTime(DateTime.now().year),
+    );
+    if (picked != null)
+      setState(() {
+        _datenController?.text = "${picked.day}/ ${picked.month}/ ${picked.year}";
+      });
+  }
+
+  setDataToTextField(data){
+    return  Column(
+      children: [
+        Text("Nom :"+data['nom']),
+        SizedBox(
+          height: 20,
+        ),
+      ],
+    );
+  }
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection("Users").
+          doc(FirebaseAuth.instance.currentUser!.email).snapshots(),
+          builder: (BuildContext context, AsyncSnapshot snapshot){
+            var data = snapshot.data;
+            if(data==null){
+              return Center(child: CircularProgressIndicator(),);
+            }
+            return setDataToTextField(data);
+          },
+
+        ),
+      )),
+    );
+  }
+}
+*/
